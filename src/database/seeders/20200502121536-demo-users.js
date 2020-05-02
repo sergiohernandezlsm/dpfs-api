@@ -6,8 +6,8 @@ module.exports = {
       "users",
       Array.from({ length: 3 }, () => {
         return {
-          firstName: faker.name.firstName(),
-          lastName: faker.name.lastName(),
+          first_name: faker.name.firstName(),
+          last_name: faker.name.lastName(),
           email: faker.internet.email(),
           createdAt: new Date(),
           updatedAt: new Date(),
