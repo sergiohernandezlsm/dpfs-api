@@ -9,6 +9,10 @@ RUN pwd
 RUN ls
 RUN cat package.json
 
+COPY ./src/database ./src/database
+COPY ./.sequelizerc .
+
+
 EXPOSE 8080
 
 CMD [ "npm", "start" ]

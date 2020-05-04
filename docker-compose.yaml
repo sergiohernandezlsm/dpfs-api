@@ -4,11 +4,21 @@ services:
     build: .
     ports:
       - "${PORT}:${PORT}"
+    depends_on:
+      - "api_container_db"
+    environment:
+      DB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      NODE_ENV: ${NODE_ENV}
     volumes:
       - ./:/usr/src/app
     container_name: api_container_app
     command: npm run dev
-  database:
+  api_container_db:
     image: mysql:5.7
     restart: unless-stopped
     ports:
