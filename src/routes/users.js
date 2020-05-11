@@ -11,4 +11,43 @@ router.get("/users", async (req, res) => {
   }
 });
 
+router.get("/users/:id", async (req, res) => {
+  try {
+    const user = await models.user.findByPk(req.params.id);
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+router.post("/users", async (req, res) => {
+  try {
+    const user = await models.user.build(req.body);
+    await user.save();
+    res.status(200).send(user.toJSON());
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+router.patch("/users/:id", async (req, res) => {
+  try {
+    const user = await models.user.findByPk(req.params.id);
+    await user.update(req.body);
+    res.status(202).send(user.toJSON());
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+router.delete("/users/:id", async (req, res) => {
+  try {
+    const user = await models.user.findByPk(req.params.id);
+    await user.destroy();
+    res.status(204).send();
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 module.exports = router;
