@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const models = require("../database/models");
+const yearMiddleware = require("../middleware/addProp");
 
-router.get("/users", async (req, res) => {
+router.get("/users", yearMiddleware, async (req, res) => {
   try {
     const users = await models.user.findAll();
     res.status(200).json(users);
@@ -30,7 +31,7 @@ router.post("/users", async (req, res) => {
   }
 });
 
-router.patch("/users/:id", async (req, res) => {
+router.patch("/users/:id", yearMiddleware, async (req, res) => {
   try {
     const user = await models.user.findByPk(req.params.id);
     await user.update(req.body);
