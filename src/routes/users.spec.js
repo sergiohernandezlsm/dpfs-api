@@ -1,9 +1,10 @@
 const express = require("express");
 const router = require("./users");
 const request = require("supertest");
-const userModel = require("../database/models/user");
+const models = require("../database/models");
 
-const mockUserFindAll = userModel.findAll;
+jest.mock("../database/models");
+const mockUserFindAll = models.user.findAll;
 
 const app = express();
 app.use(express.json());
@@ -25,12 +26,12 @@ const mockUsers = [
 ];
 
 beforeEach(() => {
-  //   mockUserFindAll.mockImplementation(() => mockUsers);
+  mockUserFindAll.mockImplementation(() => mockUsers);
 });
 
 describe("test users router", () => {
-  it("test get('/users')", async () => {
+  it("test get all users", async () => {
     const response = await request(app).get("/users");
-    // expect(response.status).toEqual(200);
+    expect(response.status).toEqual(200);
   });
 });
