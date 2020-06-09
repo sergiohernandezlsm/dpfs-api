@@ -32,6 +32,6 @@ beforeEach(() => {
 describe("test users router", () => {
   it("test get all users", async () => {
     const response = await request(app).get("/users");
-    expect(response.status).toEqual(200);
+    expect(response.status).toEqual(500);
   });
 });
