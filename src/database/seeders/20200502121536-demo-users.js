@@ -9,8 +9,8 @@ module.exports = {
           first_name: faker.name.firstName(),
           last_name: faker.name.lastName(),
           email: faker.internet.email(),
-          createdAt: new Date(),
-          updatedAt: new Date(),
+          created_at: new Date(),
+          updated_at: new Date(),
         };
       })
     );

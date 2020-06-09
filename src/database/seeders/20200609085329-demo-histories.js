@@ -8,8 +8,8 @@ module.exports = {
         return {
           title: faker.lorem.words(2),
           description: faker.lorem.sentences(5),
-          createdAt: new Date(),
-          updatedAt: new Date(),
+          created_at: new Date(),
+          updated_at: new Date(),
         };
       })
     );
