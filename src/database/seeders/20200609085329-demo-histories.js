@@ -7,7 +7,7 @@ module.exports = {
       Array.from({ length: 4 }, () => {
         return {
           title: faker.lorem.words(2),
-          description: faker.lorem.lines(),
+          description: faker.lorem.sentences(5),
           createdAt: new Date(),
           updatedAt: new Date(),
         };
