@@ -13,14 +13,14 @@ app.use("/", router);
 const mockUsers = [
   {
     id: 1,
-    first_name: "sergiosssss",
-    last_name: "JAJA",
+    firstName: "sergiosssss",
+    lastName: "JAJA",
     email: "Esperanza_Padberg@hotmail.com",
   },
   {
     id: 2,
-    first_name: "Bridie",
-    last_name: "Grant",
+    firstName: "Bridie",
+    lastName: "Grant",
     email: "Josiane.Bednar@yahoo.com",
   },
 ];

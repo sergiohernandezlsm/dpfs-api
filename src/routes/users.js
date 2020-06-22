@@ -6,9 +6,9 @@ const yearMiddleware = require("../middleware/addProp");
 router.get("/users", yearMiddleware, async (req, res) => {
   try {
     const users = await models.user.findAll({
-      // attributes: ["first_name"],
+      // attributes: ["firstName"],
       // where: {
-      //   ["first_name"]: "sergiosssss",
+      //   ["firstName"]: "sergiosssss",
       // },
     });
     res.status(200).json(users);
