@@ -6,7 +6,9 @@ const users = require("./src/routes/users");
 // db.sequelize.sync();
 
 app.use(express.json());
-app.use("/", users);
+app.use("/", users).get('/', (req, res) => {
+  res.send({ message: 'Public endpoint is live' });
+});
 
 app.listen(port, () =>
   console.log(`Example app listening at http://localhost:${port}`)
