@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.TEXT,
       },
     },
-    {}
+    { paranoid: true }
   );
   history.associate = function (models) {
     // associations can be defined here

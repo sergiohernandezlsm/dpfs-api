@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
       },
     },
-    {}
+    { paranoid: true }
   );
   user.associate = function (models) {
     // associations can be defined here
