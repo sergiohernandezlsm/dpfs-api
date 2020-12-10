@@ -7,6 +7,19 @@ jest.mock("../database/models");
 const mockUserFindAll = models.user.findAll;
 const mockUserFindByPk = models.user.findByPk;
 const mockBuild = models.user.build;
+const mockSave = jest.fn();
+const mockToJson = jest.fn();
+const mockDestroy = jest.fn();
+const mockUpdate = jest.fn();
+const mockReload = jest.fn();
+
+const createMockInstance = () => ({
+  save: mockSave,
+  destroy: mockDestroy,
+  toJSON: mockToJson,
+  update: mockUpdate,
+  reload: mockReload,
+});
 
 const app = express();
 app.use(express.json());
@@ -77,5 +90,19 @@ describe("test users router", () => {
     mockBuild.mockImplementation(() => { throw 'error' });
     const response = await request(app).post(`/users`);
     expect(response.status).toEqual(500);
+  });
+
+  it("test cannot post user", async () => {
+    mockBuild.mockImplementation(createMockInstance);
+    // mockBuild.mockImplementation(createMockInstance);
+    const response = await request(app).post(`/users`).send({
+      id: 3,
+      firstName: "sergiosssss",
+      lastName: "JAJA",
+      email: "Esperanza_Padberg@hotmail.com",
+    });
+
+    console.log(response);
+    expect(response.status).toEqual(200);
   });
 });
