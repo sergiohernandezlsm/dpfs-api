@@ -66,8 +66,15 @@ describe("test users router", () => {
     expect(response.status).toEqual(200);
   });
 
+  it("test cannot get user by id", async () => {
+    mockUserFindByPk.mockImplementation(() => { throw 'error' });
+    const id = 1;
+    const response = await request(app).get(`/users/${id}`);
+    expect(response.status).toEqual(500);
+  });
+
   it("test cannot post user", async () => {
-    mockBuild.mockImplementation(() => null);
+    mockBuild.mockImplementation(() => { throw 'error' });
     const response = await request(app).post(`/users`);
     expect(response.status).toEqual(500);
   });
