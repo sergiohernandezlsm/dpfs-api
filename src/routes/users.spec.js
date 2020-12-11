@@ -11,14 +11,12 @@ const mockSave = jest.fn();
 const mockToJson = jest.fn();
 const mockDestroy = jest.fn();
 const mockUpdate = jest.fn();
-const mockReload = jest.fn();
 
 const createMockInstance = () => ({
   save: mockSave,
   destroy: mockDestroy,
   toJSON: mockToJson,
   update: mockUpdate,
-  reload: mockReload,
 });
 
 const app = express();
@@ -50,7 +48,7 @@ const mockUser = {
 beforeEach(() => {
   jest.clearAllMocks();
   mockUserFindAll.mockImplementation(() => mockUsers);
-  mockUserFindByPk.mockImplementation(() => mockUser);
+  mockUserFindByPk.mockImplementation(createMockInstance);
   mockBuild.mockImplementation(createMockInstance);
 });
 
@@ -100,5 +98,35 @@ describe("test users router", () => {
       email: "Esperanza_Padberg@hotmail.com",
     });
     expect(response.status).toEqual(200);
+  });
+
+  it("test can patch user", async () => {
+    const newPatch = { firstName: "new name" };
+    const id = 3;
+    mockToJson.mockImplementation(() => mockUser);
+    const response = await request(app).patch(`/users/${id}`).send(newPatch);
+    expect(response.status).toEqual(200);
+  });
+
+  it("test cannot patch user", async () => {
+    const newPatch = { firstName: "new name" };
+    const id = 3;
+    mockToJson.mockImplementation(() => { throw 'error' });
+    const response = await request(app).patch(`/users/${id}`).send(newPatch);
+    expect(response.status).toEqual(500);
+  });
+
+  it("test can delete user", async () => {
+    const id = 3;
+    mockToJson.mockImplementation(() => mockUser);
+    const response = await request(app).delete(`/users/${id}`);
+    expect(response.status).toEqual(200);
+  });
+
+  it("test cannot delete user", async () => {
+    const id = 3;
+    mockUserFindByPk.mockImplementation(() => { throw 'error' });
+    const response = await request(app).delete(`/users/${id}`);
+    expect(response.status).toEqual(500);
   });
 });

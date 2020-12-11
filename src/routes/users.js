@@ -39,7 +39,7 @@ router.patch("/users/:id", yearMiddleware, async (req, res) => {
   try {
     const user = await models.user.findByPk(req.params.id);
     await user.update(req.body);
-    res.status(202).send(user.toJSON());
+    res.status(200).send(user.toJSON());
   } catch (err) {
     res.status(500).json({ message: `${err} in server` });
   }
@@ -49,7 +49,7 @@ router.delete("/users/:id", async (req, res) => {
   try {
     const user = await models.user.findByPk(req.params.id);
     await user.destroy();
-    res.status(204).send();
+    res.status(200).send();
   } catch (err) {
     res.status(500).json({ message: `${err} in server` });
   }
