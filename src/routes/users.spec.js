@@ -50,7 +50,8 @@ const mockUser = {
 beforeEach(() => {
   jest.clearAllMocks();
   mockUserFindAll.mockImplementation(() => mockUsers);
-  mockUserFindByPk.mockImplementation(() => mockUsers);
+  mockUserFindByPk.mockImplementation(() => mockUser);
+  mockBuild.mockImplementation(createMockInstance);
 });
 
 describe("test users router", () => {
@@ -93,16 +94,11 @@ describe("test users router", () => {
   });
 
   it("test cannot post user", async () => {
-    mockBuild.mockImplementation(createMockInstance);
-    // mockBuild.mockImplementation(createMockInstance);
     const response = await request(app).post(`/users`).send({
-      id: 3,
       firstName: "sergiosssss",
       lastName: "JAJA",
       email: "Esperanza_Padberg@hotmail.com",
     });
-
-    console.log(response);
     expect(response.status).toEqual(200);
   });
 });
