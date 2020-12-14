@@ -91,8 +91,13 @@ describe("test users router", () => {
     expect(response.status).toEqual(500);
   });
 
-  it("test cannot post user", async () => {
+  it("test can post user", async () => {
     const response = await request(app).post(`/users`).send({
+      firstName: "sergiosssss",
+      lastName: "JAJA",
+      email: "Esperanza_Padberg@hotmail.com",
+    });
+    expect(mockBuild).toHaveBeenCalledWith({
       firstName: "sergiosssss",
       lastName: "JAJA",
       email: "Esperanza_Padberg@hotmail.com",
@@ -106,6 +111,7 @@ describe("test users router", () => {
     mockToJson.mockImplementation(() => mockUser);
     const response = await request(app).patch(`/users/${id}`).send(newPatch);
     expect(response.status).toEqual(200);
+    console.log(mockToJson)
   });
 
   it("test cannot patch user", async () => {
