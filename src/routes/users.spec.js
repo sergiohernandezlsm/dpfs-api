@@ -111,7 +111,6 @@ describe("test users router", () => {
     mockToJson.mockImplementation(() => mockUser);
     const response = await request(app).patch(`/users/${id}`).send(newPatch);
     expect(response.status).toEqual(200);
-    console.log(mockToJson)
   });
 
   it("test cannot patch user", async () => {
