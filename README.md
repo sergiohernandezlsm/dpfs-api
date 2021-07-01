@@ -55,3 +55,5 @@ docker-compose config
 ## BUILD IMAGE AND RUN FOR THE FIRST TIME
 
 docker-compose up --build
+
+# To use in cms
